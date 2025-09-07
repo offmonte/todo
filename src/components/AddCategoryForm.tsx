@@ -22,12 +22,12 @@ export default function AddCategoryForm({ onAdd }: Props) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Nova categoria"
-        className="flex-1 rounded-md border border-black/10 dark:border-white/20 bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-foreground/20"
+        className="flex-1 rounded-md border border-black/10 dark:border-white/20 bg-card px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-accent/40"
         aria-label="Nome da categoria"
       />
       <button
         type="submit"
-        className="rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+        className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:brightness-95"
       >
         Adicionar
       </button>
