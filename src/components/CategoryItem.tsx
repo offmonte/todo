@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import AddTodoForm from "@/components/AddTodoForm";
 import TodoItem from "@/components/TodoItem";
-import type { Category, Todo } from "@/types/todo";
+import type { Category, Filter } from "@/types/todo";
 
 type Props = {
   category: Category;
@@ -11,6 +11,8 @@ type Props = {
   onToggleTodo: (categoryId: string, todoId: string) => void;
   onEditTodo: (categoryId: string, todoId: string, text: string) => void;
   onDeleteTodo: (categoryId: string, todoId: string) => void;
+  filter: Filter;
+  onMoveTodo: (fromCategoryId: string, toCategoryId: string, todoId: string) => void;
 };
 
 export default function CategoryItem({
@@ -21,6 +23,8 @@ export default function CategoryItem({
   onToggleTodo,
   onEditTodo,
   onDeleteTodo,
+  filter,
+  onMoveTodo,
 }: Props) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(category.name);
@@ -31,11 +35,34 @@ export default function CategoryItem({
     return { total, done };
   }, [category.todos]);
 
+  const visibleTodos = useMemo(() => {
+    if (filter === "pending") return category.todos.filter((t) => !t.completed);
+    if (filter === "completed") return category.todos.filter((t) => t.completed);
+    return category.todos;
+  }, [category.todos, filter]);
+
   const submitRename = () => {
     const trimmed = draft.trim();
     if (!trimmed) return;
     onRename(category.id, trimmed);
     setEditing(false);
+  };
+
+  const onDragOver = (e: React.DragEvent<HTMLUListElement>) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
+
+  const onDrop = (e: React.DragEvent<HTMLUListElement>) => {
+    e.preventDefault();
+    try {
+      const payload = JSON.parse(e.dataTransfer.getData("text/plain"));
+      const { fromCategoryId, todoId } = payload as { fromCategoryId: string; todoId: string };
+      if (!fromCategoryId || !todoId) return;
+      onMoveTodo(fromCategoryId, category.id, todoId);
+    } catch {
+      // ignore
+    }
   };
 
   return (
@@ -85,11 +112,11 @@ export default function CategoryItem({
         <AddTodoForm onAdd={(text) => onAddTodo(category.id, text)} />
       </div>
 
-      {category.todos.length === 0 ? (
-        <p className="text-sm opacity-70">Nenhum to-do ainda.</p>
+      {visibleTodos.length === 0 ? (
+        <p className="text-sm opacity-70">Nenhum to-do para este filtro.</p>
       ) : (
-        <ul className="flex flex-col gap-2">
-          {category.todos.map((todo) => (
+        <ul className="flex flex-col gap-2" onDragOver={onDragOver} onDrop={onDrop}>
+          {visibleTodos.map((todo) => (
             <TodoItem
               key={todo.id}
               todo={todo}
@@ -100,6 +127,7 @@ export default function CategoryItem({
           ))}
         </ul>
       )}
+      <p className="mt-3 text-xs opacity-60">Dica: arraste um to-do para outra categoria para mover.</p>
     </section>
   );
 }
