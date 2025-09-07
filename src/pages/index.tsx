@@ -1,4 +1,5 @@
 import Image from "next/image";
+import TodoApp from "@/components/TodoApp";
 import { Geist, Geist_Mono } from "next/font/google";
 
 const geistSans = Geist({
