@@ -19,8 +19,8 @@ export default function Home() {
   return (
     <div className={`${geistSans.className} ${geistMono.className} font-sans min-h-screen bg-background text-foreground flex flex-col`}>
       <AppHeader />
-      <main className="flex-1 px-6 py-6 sm:py-10">
-        <div className="mx-auto max-w-6xl">
+      <main className="relative flex-1 px-6 py-6 sm:py-10">
+        <div className="mx-auto max-w-6xl relative">
           <TodoApp />
         </div>
       </main>
