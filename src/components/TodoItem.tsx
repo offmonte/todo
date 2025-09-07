@@ -33,13 +33,13 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
         );
       }}
     >
-      <div className="flex items-center gap-3 min-w-0 flex-1">
+      <div className="flex items-start gap-3 min-w-0 flex-1">
         <input
           id={`todo-${todo.id}`}
           type="checkbox"
           checked={todo.completed}
           onChange={() => onToggle(todo.id)}
-          className="size-4 rounded-sm border-black/30 dark:border-white/30 accent-foreground"
+          className="mt-0.5 size-4 rounded-sm border-black/30 dark:border-white/30 accent-foreground"
           aria-label="Concluir to-do"
         />
         {editing ? (
@@ -47,7 +47,6 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
             autoFocus
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
-            onBlur={submitEdit}
             onKeyDown={(e) => {
               if (e.key === "Enter") submitEdit();
               if (e.key === "Escape") setEditing(false);
@@ -58,14 +57,14 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
         ) : (
           <label
             htmlFor={`todo-${todo.id}`}
-            className={`truncate text-sm ${todo.completed ? "line-through opacity-60" : ""}`}
+            className={`text-sm break-words whitespace-pre-wrap ${todo.completed ? "line-through opacity-60" : ""}`}
           >
             {todo.text}
           </label>
         )}
       </div>
       <div className="flex items-center gap-2">
-        {!editing && (
+        {!editing ? (
           <button
             onClick={() => {
               setDraft(todo.text);
@@ -75,13 +74,22 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
           >
             Editar
           </button>
+        ) : (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={submitEdit}
+              className="rounded-md bg-foreground px-2 py-1 text-xs font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+            >
+              Salvar
+            </button>
+            <button
+              onClick={() => onDelete(todo.id)}
+              className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs text-red-600 dark:text-red-400 transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
+            >
+              Excluir
+            </button>
+          </div>
         )}
-        <button
-          onClick={() => onDelete(todo.id)}
-          className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs text-red-600 dark:text-red-400 transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
-        >
-          Excluir
-        </button>
       </div>
     </li>
   );
