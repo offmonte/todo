@@ -67,7 +67,7 @@ export default function CategoryItem({
                 setDraft(category.name);
                 setEditing(true);
               }}
-              className="rounded-md border border-black/10 dark:border:white/20 px-2 py-1 text-xs transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
+              className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
             >
               Renomear
             </button>
