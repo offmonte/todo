@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import type React from "react";
 import AddTodoForm from "@/components/AddTodoForm";
 import TodoItem from "@/components/TodoItem";
 import type { Category, Filter } from "@/types/todo";
