@@ -74,7 +74,6 @@ export default function CategoryItem({
             autoFocus
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
-            onBlur={submitRename}
             onKeyDown={(e) => {
               if (e.key === "Enter") submitRename();
               if (e.key === "Escape") setEditing(false);
@@ -89,7 +88,7 @@ export default function CategoryItem({
           </h2>
         )}
         <div className="flex items-center gap-2">
-          {!editing && (
+          {!editing ? (
             <button
               onClick={() => {
                 setDraft(category.name);
@@ -97,15 +96,24 @@ export default function CategoryItem({
               }}
               className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
             >
-              Renomear
+              Editar
             </button>
+          ) : (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={submitRename}
+                className="rounded-md bg-foreground px-2 py-1 text-xs font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+              >
+                Salvar
+              </button>
+              <button
+                onClick={() => onDelete(category.id)}
+                className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs text-red-600 dark:text-red-400 transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
+              >
+                Excluir
+              </button>
+            </div>
           )}
-          <button
-            onClick={() => onDelete(category.id)}
-            className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs text-red-600 dark:text-red-400 transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
-          >
-            Excluir
-          </button>
         </div>
       </header>
 
