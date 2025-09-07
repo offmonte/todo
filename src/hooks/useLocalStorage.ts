@@ -5,20 +5,28 @@ function isBrowser() {
 }
 
 export function useLocalStorage<T>(key: string, initialValue: T) {
-  const isFirst = useRef(true);
-  const [value, setValue] = useState<T>(() => {
-    if (!isBrowser()) return initialValue;
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? (JSON.parse(item) as T) : initialValue;
-    } catch {
-      return initialValue;
-    }
-  });
+  const skipFirstPersist = useRef(true);
+  const [value, setValue] = useState<T>(initialValue);
 
-  // Persist changes
+  // Load from storage on mount (after SSR) to avoid hydration mismatch
   useEffect(() => {
     if (!isBrowser()) return;
+    try {
+      const raw = window.localStorage.getItem(key);
+      const next = raw ? (JSON.parse(raw) as T) : initialValue;
+      setValue(next);
+    } catch {
+      // ignore parse errors
+    }
+  }, [key, initialValue]);
+
+  // Persist changes (skip first to not clobber stored value before initial load)
+  useEffect(() => {
+    if (!isBrowser()) return;
+    if (skipFirstPersist.current) {
+      skipFirstPersist.current = false;
+      return;
+    }
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch {
@@ -26,7 +34,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     }
   }, [key, value]);
 
-  // Storage sync across tabs and within page (first render skip)
+  // Storage sync across tabs
   useEffect(() => {
     if (!isBrowser()) return;
     const onStorage = (e: StorageEvent) => {
