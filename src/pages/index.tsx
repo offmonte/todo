@@ -12,12 +12,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import AppHeader from "@/components/AppHeader";
+import AppFooter from "@/components/AppFooter";
+
 export default function Home() {
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
-    >
-      <TodoApp />
+    <div className={`${geistSans.className} ${geistMono.className} font-sans min-h-screen bg-background text-foreground flex flex-col`}>
+      <AppHeader />
+      <main className="flex-1 px-6 py-6 sm:py-10">
+        <div className="mx-auto max-w-6xl">
+          <TodoApp />
+        </div>
+      </main>
+      <AppFooter />
     </div>
   );
 }
