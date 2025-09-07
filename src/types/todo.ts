@@ -9,3 +9,5 @@ export type Category = {
   name: string;
   todos: Todo[];
 };
+
+export type Filter = "all" | "pending" | "completed";
