@@ -13,15 +13,15 @@ const options: { key: Filter; label: string }[] = [
 
 export default function FilterBar({ value, onChange }: Props) {
   return (
-    <div className="inline-flex overflow-hidden rounded-full border border-black/10 dark:border-white/20 bg-background p-1 text-sm">
+    <div className="inline-flex overflow-hidden rounded-full border border-black/10 dark:border-white/20 bg-card p-1 text-sm">
       {options.map((opt) => (
         <button
           key={opt.key}
           onClick={() => onChange(opt.key)}
           className={`px-3 py-1.5 transition-colors ${
             value === opt.key
-              ? "bg-foreground text-background"
-              : "hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
+              ? "bg-accent text-white"
+              : "hover:bg-muted"
           }`}
           aria-pressed={value === opt.key}
         >
