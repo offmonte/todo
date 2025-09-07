@@ -22,7 +22,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
 
   return (
     <li
-      className="flex items-center justify-between gap-3 rounded-md border border-black/10 dark:border-white/20 bg-background px-3 py-2"
+      className="flex items-center justify-between gap-3 rounded-md border border-black/10 dark:border-white/20 bg-card px-3 py-2"
       draggable
       onDragStart={(e) => {
         if (!dragCategoryId) return;
@@ -78,7 +78,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
           <div className="flex items-center gap-2">
             <button
               onClick={submitEdit}
-              className="rounded-md bg-foreground px-2 py-1 text-xs font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+              className="rounded-md bg-accent px-2 py-1 text-xs font-medium text-white transition-colors hover:brightness-95"
             >
               Salvar
             </button>
