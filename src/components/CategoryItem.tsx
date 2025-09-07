@@ -123,11 +123,12 @@ export default function CategoryItem({
               onToggle={(todoId) => onToggleTodo(category.id, todoId)}
               onEdit={(todoId, text) => onEditTodo(category.id, todoId, text)}
               onDelete={(todoId) => onDeleteTodo(category.id, todoId)}
+              dragCategoryId={category.id}
             />
           ))}
         </ul>
       )}
-      <p className="mt-3 text-xs opacity-60">Dica: arraste um to-do para outra categoria para mover.</p>
+      <p className="mt-3 text-xs opacity-60">Dica: arraste um to-do para outra categoria.</p>
     </section>
   );
 }
