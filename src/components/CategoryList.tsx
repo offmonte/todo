@@ -1,5 +1,5 @@
 import CategoryItem from "@/components/CategoryItem";
-import type { Category } from "@/types/todo";
+import type { Category, Filter } from "@/types/todo";
 
 type Props = {
   categories: Category[];
@@ -9,6 +9,8 @@ type Props = {
   onToggleTodo: (categoryId: string, todoId: string) => void;
   onEditTodo: (categoryId: string, todoId: string, text: string) => void;
   onDeleteTodo: (categoryId: string, todoId: string) => void;
+  filter: Filter;
+  onMoveTodo: (fromCategoryId: string, toCategoryId: string, todoId: string) => void;
 };
 
 export default function CategoryList({
@@ -19,6 +21,8 @@ export default function CategoryList({
   onToggleTodo,
   onEditTodo,
   onDeleteTodo,
+  filter,
+  onMoveTodo,
 }: Props) {
   if (categories.length === 0) {
     return <p className="text-sm opacity-70">Crie sua primeira categoria para começar.</p>;
@@ -36,6 +40,8 @@ export default function CategoryList({
           onToggleTodo={onToggleTodo}
           onEditTodo={onEditTodo}
           onDeleteTodo={onDeleteTodo}
+          filter={filter}
+          onMoveTodo={onMoveTodo}
         />
       ))}
     </div>
