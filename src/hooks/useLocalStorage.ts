@@ -5,20 +5,21 @@ function isBrowser() {
 }
 
 export function useLocalStorage<T>(key: string, initialValue: T) {
+  const initialRef = useRef(initialValue);
   const skipFirstPersist = useRef(true);
-  const [value, setValue] = useState<T>(initialValue);
+  const [value, setValue] = useState<T>(initialRef.current);
 
   // Load from storage on mount (after SSR) to avoid hydration mismatch
   useEffect(() => {
     if (!isBrowser()) return;
     try {
       const raw = window.localStorage.getItem(key);
-      const next = raw ? (JSON.parse(raw) as T) : initialValue;
+      const next = raw ? (JSON.parse(raw) as T) : initialRef.current;
       setValue(next);
     } catch {
       // ignore parse errors
     }
-  }, [key, initialValue]);
+  }, [key]);
 
   // Persist changes (skip first to not clobber stored value before initial load)
   useEffect(() => {
@@ -41,7 +42,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       if (e.storageArea !== window.localStorage) return;
       if (e.key !== key) return;
       try {
-        const next = e.newValue ? (JSON.parse(e.newValue) as T) : initialValue;
+        const next = e.newValue ? (JSON.parse(e.newValue) as T) : initialRef.current;
         setValue(next);
       } catch {
         // ignore parse errors
@@ -49,7 +50,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     };
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
-  }, [key, initialValue]);
+  }, [key]);
 
   const update = useCallback(
     (updater: T | ((prev: T) => T)) => {
@@ -58,7 +59,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     []
   );
 
-  const reset = useCallback(() => setValue(initialValue), [initialValue]);
+  const reset = useCallback(() => setValue(initialRef.current), []);
 
   return [value, update, reset] as const;
 }
