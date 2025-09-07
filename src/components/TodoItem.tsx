@@ -6,9 +6,10 @@ type Props = {
   onToggle: (id: string) => void;
   onEdit: (id: string, text: string) => void;
   onDelete: (id: string) => void;
+  dragCategoryId?: string;
 };
 
-export default function TodoItem({ todo, onToggle, onEdit, onDelete }: Props) {
+export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategoryId }: Props) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(todo.text);
 
@@ -20,7 +21,18 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete }: Props) {
   };
 
   return (
-    <li className="flex items-center justify-between gap-3 rounded-md border border-black/10 dark:border-white/20 bg-background px-3 py-2">
+    <li
+      className="flex items-center justify-between gap-3 rounded-md border border-black/10 dark:border-white/20 bg-background px-3 py-2"
+      draggable
+      onDragStart={(e) => {
+        if (!dragCategoryId) return;
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData(
+          "text/plain",
+          JSON.stringify({ fromCategoryId: dragCategoryId, todoId: todo.id })
+        );
+      }}
+    >
       <div className="flex items-center gap-3 min-w-0 flex-1">
         <input
           id={`todo-${todo.id}`}
