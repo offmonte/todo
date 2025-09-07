@@ -67,7 +67,7 @@ export default function CategoryItem({
   };
 
   return (
-    <section className="group rounded-xl border border-black/10 dark:border-white/20 bg-background p-5 shadow-sm transition-shadow hover:shadow-md" onDragOver={onDragOver} onDrop={onDrop}>
+    <section className="group rounded-xl border border-black/10 dark:border-white/20 bg-card p-5 shadow-sm transition-shadow hover:shadow-md" onDragOver={onDragOver} onDrop={onDrop}>
       <header className="mb-4 flex items-center justify-between gap-3">
         {editing ? (
           <input
@@ -102,13 +102,13 @@ export default function CategoryItem({
             <div className="flex items-center gap-2">
               <button
                 onClick={submitRename}
-                className="rounded-md bg-foreground px-2 py-1 text-xs font-medium text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]"
+                className="rounded-md bg-accent px-2 py-1 text-xs font-medium text-white transition-colors hover:brightness-95"
               >
                 Salvar
               </button>
               <button
                 onClick={() => onDelete(category.id)}
-                className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs text-red-600 dark:text-red-400 transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
+                className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs text-red-600 dark:text-red-400 transition-colors hover:bg-muted"
               >
                 Excluir
               </button>
