@@ -68,6 +68,7 @@ export default function CategoryItem({
 
   return (
     <section className="group rounded-xl border border-black/10 dark:border-white/20 bg-card p-5 shadow-sm transition-shadow hover:shadow-md" onDragOver={onDragOver} onDrop={onDrop}>
+      <div className="-mx-5 -mt-5 mb-4 h-1 rounded-t-xl bg-gradient-to-r from-accent to-accent-2" />
       <header className="mb-4 flex items-center justify-between gap-3">
         {editing ? (
           <input
@@ -94,22 +95,33 @@ export default function CategoryItem({
                 setDraft(category.name);
                 setEditing(true);
               }}
-              className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
+              className="inline-flex items-center gap-2 rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs transition-colors hover:bg-muted"
             >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M12 20h9" />
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
+              </svg>
               Editar
             </button>
           ) : (
             <div className="flex items-center gap-2">
               <button
                 onClick={submitRename}
-                className="rounded-md bg-accent px-2 py-1 text-xs font-medium text-white transition-colors hover:brightness-95"
+                className="inline-flex items-center gap-2 rounded-md bg-accent px-2 py-1 text-xs font-medium text-white transition-colors hover:brightness-95"
               >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="m20 6-11 11-5-5" />
+                </svg>
                 Salvar
               </button>
               <button
                 onClick={() => onDelete(category.id)}
-                className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs text-red-600 dark:text-red-400 transition-colors hover:bg-muted"
+                className="inline-flex items-center gap-2 rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs text-red-600 dark:text-red-400 transition-colors hover:bg-muted"
               >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <path d="M3 6h18" />
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                </svg>
                 Excluir
               </button>
             </div>
