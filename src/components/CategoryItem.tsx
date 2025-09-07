@@ -48,12 +48,12 @@ export default function CategoryItem({
     setEditing(false);
   };
 
-  const onDragOver = (e: React.DragEvent<HTMLUListElement>) => {
+  const onDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
   };
 
-  const onDrop = (e: React.DragEvent<HTMLUListElement>) => {
+  const onDrop = (e: React.DragEvent) => {
     e.preventDefault();
     try {
       const payload = JSON.parse(e.dataTransfer.getData("text/plain"));
@@ -66,7 +66,7 @@ export default function CategoryItem({
   };
 
   return (
-    <section className="rounded-lg border border-black/10 dark:border-white/20 bg-background p-4 shadow-sm">
+    <section className="rounded-lg border border-black/10 dark:border-white/20 bg-background p-4 shadow-sm" onDragOver={onDragOver} onDrop={onDrop}>
       <header className="mb-3 flex items-center justify-between gap-3">
         {editing ? (
           <input
