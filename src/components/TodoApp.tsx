@@ -125,8 +125,12 @@ export default function TodoApp() {
       <footer className="row-start-3 mt-2 flex items-center justify-center gap-3">
         <button
           onClick={() => resetCategories()}
-          className="rounded-full border border-black/10 dark:border-white/20 px-4 py-2 text-sm transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
+          className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/20 px-4 py-2 text-sm transition-colors hover:bg-muted"
         >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M3 6h18" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+          </svg>
           Limpar tudo
         </button>
       </footer>
