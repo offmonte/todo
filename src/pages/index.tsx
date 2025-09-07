@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 
 import AppHeader from "@/components/AppHeader";
 import AppFooter from "@/components/AppFooter";
+import BackgroundDecor from "@/components/BackgroundDecor";
 
 export default function Home() {
   return (
