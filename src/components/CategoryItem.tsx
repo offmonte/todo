@@ -67,8 +67,8 @@ export default function CategoryItem({
   };
 
   return (
-    <section className="rounded-lg border border-black/10 dark:border-white/20 bg-background p-4 shadow-sm" onDragOver={onDragOver} onDrop={onDrop}>
-      <header className="mb-3 flex items-center justify-between gap-3">
+    <section className="group rounded-xl border border-black/10 dark:border-white/20 bg-background p-5 shadow-sm transition-shadow hover:shadow-md" onDragOver={onDragOver} onDrop={onDrop}>
+      <header className="mb-4 flex items-center justify-between gap-3">
         {editing ? (
           <input
             autoFocus
@@ -85,7 +85,7 @@ export default function CategoryItem({
         ) : (
           <h2 className="truncate text-base font-semibold">
             {category.name}
-            <span className="ml-2 text-xs font-normal opacity-70">{counts.done}/{counts.total}</span>
+            <span className="ml-2 rounded-full border border-black/10 dark:border-white/20 px-2 py-0.5 text-xs font-normal opacity-80">{counts.done}/{counts.total}</span>
           </h2>
         )}
         <div className="flex items-center gap-2">
@@ -109,7 +109,7 @@ export default function CategoryItem({
         </div>
       </header>
 
-      <div className="mb-3">
+      <div className="mb-4">
         <AddTodoForm onAdd={(text) => onAddTodo(category.id, text)} />
       </div>
 
