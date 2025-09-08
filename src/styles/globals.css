@@ -23,12 +23,12 @@
 /**** Theme overrides via data-theme (system = no attribute) ****/
 [data-theme="light"] {
   color-scheme: light;
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --muted: #f1f5f9;
-  --accent: #6366f1;
-  --accent-2: #22d3ee;
+  --background: #f9fafb;   /* cinza bem claro no lugar do branco puro */
+  --foreground: #111827;   /* texto levemente mais escuro */
+  --card: #ffffff;         /* cartões ainda brancos, se destacam no fundo */
+  --muted: #e5e7eb;        /* cinza mais suave */
+  --accent: #6366f1;       /* indigo */
+  --accent-2: #22d3ee;     /* cyan */
 }
 
 [data-theme="dark"] {
