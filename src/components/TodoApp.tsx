@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import AddCategoryForm from "@/components/AddCategoryForm";
 import CategoryList from "@/components/CategoryList";
 import FilterBar from "@/components/FilterBar";
@@ -16,20 +16,20 @@ export default function TodoApp() {
   );
   const [filter, setFilter] = useLocalStorage<Filter>("todo.filter", "all");
 
-  const addCategory = (name: string) => {
+  const addCategory = useCallback((name: string) => {
     const newCategory: Category = { id: generateId(), name, todos: [] };
     setCategories((prev) => [newCategory, ...prev]);
-  };
+  }, [setCategories]);
 
-  const renameCategory = (id: string, name: string) => {
+  const renameCategory = useCallback((id: string, name: string) => {
     setCategories((prev) => prev.map((c) => (c.id === id ? { ...c, name } : c)));
-  };
+  }, [setCategories]);
 
-  const deleteCategory = (id: string) => {
+  const deleteCategory = useCallback((id: string) => {
     setCategories((prev) => prev.filter((c) => c.id !== id));
-  };
+  }, [setCategories]);
 
-  const addTodo = (categoryId: string, text: string) => {
+  const addTodo = useCallback((categoryId: string, text: string) => {
     setCategories((prev) =>
       prev.map((c) =>
         c.id === categoryId
@@ -37,9 +37,9 @@ export default function TodoApp() {
           : c
       )
     );
-  };
+  }, [setCategories]);
 
-  const toggleTodo = (categoryId: string, todoId: string) => {
+  const toggleTodo = useCallback((categoryId: string, todoId: string) => {
     setCategories((prev) =>
       prev.map((c) =>
         c.id === categoryId
@@ -50,9 +50,9 @@ export default function TodoApp() {
           : c
       )
     );
-  };
+  }, [setCategories]);
 
-  const editTodo = (categoryId: string, todoId: string, text: string) => {
+  const editTodo = useCallback((categoryId: string, todoId: string, text: string) => {
     setCategories((prev) =>
       prev.map((c) =>
         c.id === categoryId
@@ -60,20 +60,20 @@ export default function TodoApp() {
           : c
       )
     );
-  };
+  }, [setCategories]);
 
-  const deleteTodo = (categoryId: string, todoId: string) => {
+  const deleteTodo = useCallback((categoryId: string, todoId: string) => {
     setCategories((prev) =>
       prev.map((c) =>
         c.id === categoryId ? { ...c, todos: c.todos.filter((t) => t.id !== todoId) } : c
       )
     );
-  };
+  }, [setCategories]);
 
-  const moveTodo = (fromCategoryId: string, toCategoryId: string, todoId: string) => {
-    if (fromCategoryId === toCategoryId) return; // moving to same category does nothing for now
+  const moveTodo = useCallback((fromCategoryId: string, toCategoryId: string, todoId: string) => {
+    if (fromCategoryId === toCategoryId) return;
     setCategories((prev) => {
-      let moved;
+      let moved: { id: string; text: string; completed: boolean } | undefined;
       const removed = prev.map((c) => {
         if (c.id !== fromCategoryId) return c;
         const idx = c.todos.findIndex((t) => t.id === todoId);
@@ -83,11 +83,9 @@ export default function TodoApp() {
         return { ...c, todos: nextTodos };
       });
       if (!moved) return prev;
-      return removed.map((c) =>
-        c.id === toCategoryId ? { ...c, todos: [moved!, ...c.todos] } : c
-      );
+      return removed.map((c) => (c.id === toCategoryId ? { ...c, todos: [moved!, ...c.todos] } : c));
     });
-  };
+  }, [setCategories]);
 
   const totalCounts = useMemo(() => {
     const total = categories.reduce((acc, c) => acc + c.todos.length, 0);
