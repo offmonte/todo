@@ -67,7 +67,7 @@ export default function CategoryItem({
   };
 
   return (
-    <section className="group rounded-xl border border-black/10 dark:border-white/20 bg-card p-5 shadow-sm transition-shadow hover:shadow-md" onDragOver={onDragOver} onDrop={onDrop}>
+    <section className="group rounded-xl border border-black/10 dark:border-white/20 bg-card p-5 shadow-sm transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5" onDragOver={onDragOver} onDrop={onDrop}>
       <div className="-mx-5 -mt-5 mb-4 h-1 rounded-t-xl bg-gradient-to-r from-accent to-accent-2" />
       <header className="mb-4 flex items-center justify-between gap-3">
         {editing ? (
