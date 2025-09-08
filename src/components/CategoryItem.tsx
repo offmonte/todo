@@ -80,7 +80,7 @@ export default function CategoryItem({
               if (e.key === "Escape") setEditing(false);
             }}
             className="min-w-0 flex-1 rounded border border-black/10 dark:border-white/20 bg-background px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-foreground/20"
-            aria-label="Editar nome da categoria"
+            aria-label="Edit category name"
           />
         ) : (
           <h2 className="truncate text-base font-semibold">
@@ -101,7 +101,7 @@ export default function CategoryItem({
                 <path d="M12 20h9" />
                 <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
               </svg>
-              Editar
+              Edit
             </button>
           ) : (
             <div className="flex items-center gap-2">
@@ -112,7 +112,7 @@ export default function CategoryItem({
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="m20 6-11 11-5-5" />
                 </svg>
-                Salvar
+                Save
               </button>
               <button
                 onClick={() => onDelete(category.id)}
@@ -122,7 +122,7 @@ export default function CategoryItem({
                   <path d="M3 6h18" />
                   <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                 </svg>
-                Excluir
+                Delete
               </button>
             </div>
           )}
@@ -134,7 +134,7 @@ export default function CategoryItem({
       </div>
 
       {visibleTodos.length === 0 ? (
-        <p className="text-sm opacity-70">Nenhum to-do para este filtro.</p>
+        <p className="text-sm opacity-70">No to-dos for this filter.</p>
       ) : (
         <ul className="flex flex-col gap-2" onDragOver={onDragOver} onDrop={onDrop}>
           {visibleTodos.map((todo) => (
@@ -149,7 +149,7 @@ export default function CategoryItem({
           ))}
         </ul>
       )}
-      <p className="mt-3 text-xs opacity-60">Dica: arraste um to-do para outra categoria.</p>
+      <p className="mt-3 text-xs opacity-60">Tip: drag a to-do to another category.</p>
     </section>
   );
 }
