@@ -18,6 +18,7 @@ export default function AddCategoryForm({ onAdd }: Props) {
   return (
     <form onSubmit={handleSubmit} className="flex w-full max-w-xl items-center gap-2">
       <input
+        id="add-category-input"
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
