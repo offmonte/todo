@@ -33,7 +33,7 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --background: #0a0a0a;
+  --background: #333333;
   --foreground: #e5e7eb;
   --card: #0f1115;
   --muted: #151821;
