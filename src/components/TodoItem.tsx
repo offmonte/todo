@@ -40,7 +40,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
           checked={todo.completed}
           onChange={() => onToggle(todo.id)}
           className="mt-0.5 size-4 rounded-sm border-black/30 dark:border-white/30 accent-foreground"
-          aria-label="Concluir to-do"
+          aria-label="Complete to-do"
         />
         {editing ? (
           <input
@@ -52,7 +52,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
               if (e.key === "Escape") setEditing(false);
             }}
             className="min-w-0 flex-1 rounded border border-black/10 dark:border-white/20 bg-background px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-foreground/20"
-            aria-label="Editar to-do"
+            aria-label="Edit to-do"
           />
         ) : (
           <label
@@ -72,7 +72,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
             }}
             className="rounded-md border border-black/10 dark:border-white/20 px-2 py-1 text-xs transition-colors hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a]"
           >
-            Editar
+            Edit
           </button>
         ) : (
           <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="m20 6-11 11-5-5" />
               </svg>
-              Salvar
+              Save
             </button>
             <button
               onClick={() => onDelete(todo.id)}
@@ -93,7 +93,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
                 <path d="M3 6h18" />
                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
               </svg>
-              Excluir
+              Delete
             </button>
           </div>
         )}
