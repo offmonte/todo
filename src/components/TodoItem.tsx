@@ -22,7 +22,7 @@ export default function TodoItem({ todo, onToggle, onEdit, onDelete, dragCategor
 
   return (
     <li
-      className="flex items-center justify-between gap-3 rounded-md border border-black/10 dark:border-white/20 bg-card px-3 py-2"
+      className="flex items-center justify-between gap-3 rounded-md border border-black/10 dark:border-white/20 bg-card px-3 py-2 transition-colors hover:bg-muted/60"
       draggable
       onDragStart={(e) => {
         if (!dragCategoryId) return;
