@@ -9,8 +9,8 @@ export default function AppHeader() {
             </svg>
           </div>
           <div className="leading-tight">
-            <p className="text-sm opacity-70">Organize-se</p>
-            <h1 className="text-lg font-semibold">Lista de Tarefas por Categoria</h1>
+            <p className="text-sm opacity-70">Get organized</p>
+            <h1 className="text-lg font-semibold">To-Do List by Category</h1>
           </div>
         </div>
       </div>
