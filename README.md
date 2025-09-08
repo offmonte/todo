@@ -1,12 +1,12 @@
-# To-Do por Categorias – Projeto
+# To‑Do by Categories – Project
 
-Aplicação de lista de tarefas organizada por categorias, construída com Next.js (Pages Router) e Tailwind CSS. Inclui filtro por status, edição inline, drag‑and‑drop entre categorias e persistência em localStorage.
+Task list application organized by categories, built with Next.js (Pages Router) and Tailwind CSS. It includes status filtering, inline editing, drag‑and‑drop between categories, and localStorage persistence.
 
 ## Stack
 - Next.js 15 (Pages Router)
 - React 19 + TypeScript (strict)
 - Tailwind CSS v4 (+ @tailwindcss/postcss)
-- next/font com Poppins (sans) e Geist Mono
+- next/font with Poppins (sans) and Geist Mono
 - ESLint (next/core-web-vitals, TS)
 
 ## Scripts
@@ -15,92 +15,92 @@ Aplicação de lista de tarefas organizada por categorias, construída com Next.
 - start: `npm start`
 - lint: `npm run lint`
 
-## Estrutura de pastas
+## Folder structure
 ```
 .
 ├─ src/
 │  ├─ components/
-│  │  ├─ AddCategoryForm.tsx        # Formulário para nova categoria
-│  │  ├─ AddTodoForm.tsx            # Formulário para novo to‑do
-│  │  ├─ AppFooter.tsx              # Rodapé (tecnologias + autor)
-│  │  ├─ AppHeader.tsx              # Cabeçalho
-│  │  ├─ BackgroundDecor.tsx        # Elementos decorativos de fundo
-│  │  ├─ CategoryItem.tsx           # Card de categoria (CRUD, contadores)
-│  │  ├─ CategoryList.tsx           # Lista/grid de categorias (estado vazio)
-│  │  ├─ FilterBar.tsx              # Filtros: all/pending/completed
-│  │  ├─ TodoApp.tsx                # Orquestrador da aplicação
-│  │  └─ TodoItem.tsx               # Item de to‑do (toggle, editar, excluir, DnD)
+│  │  ├─ AddCategoryForm.tsx        # Form for a new category
+│  │  ├─ AddTodoForm.tsx            # Form for a new to‑do
+│  │  ├─ AppFooter.tsx              # Footer (technologies + author)
+│  │  ├─ AppHeader.tsx              # Header
+│  │  ├─ BackgroundDecor.tsx        # Background decorative elements
+│  │  ├─ CategoryItem.tsx           # Category card (CRUD, counters)
+│  │  ├─ CategoryList.tsx           # Category grid/list (empty state)
+│  │  ├─ FilterBar.tsx              # Filters: all/pending/completed
+│  │  ├─ TodoApp.tsx                # App orchestrator
+│  │  └─ TodoItem.tsx               # To‑do item (toggle, edit, delete, DnD)
 │  ├─ hooks/
-│  │  └─ useLocalStorage.ts         # Hook SSR‑safe para persistir estado
+│  │  └─ useLocalStorage.ts         # SSR‑safe hook to persist state
 │  ├─ pages/
-│  │  ├─ api/hello.ts               # Exemplo de API route
-│  │  ├─ _app.tsx                   # Import de estilos globais
+│  │  ├─ api/hello.ts               # Sample API route
+│  │  ├─ _app.tsx                   # Global styles import
 │  │  ├─ _document.tsx              # HTML shell
-│  │  └─ index.tsx                  # Página principal (carrega TodoApp)
+│  │  └─ index.tsx                  # Main page (loads TodoApp)
 │  ├─ styles/
-│  │  └─ globals.css                # Tailwind + tokens CSS e temas
+│  │  └─ globals.css                # Tailwind + CSS tokens and themes
 │  └─ types/
-│     └��� todo.ts                    # Tipos: Todo, Category, Filter
+│     └─ todo.ts                    # Types: Todo, Category, Filter
 ├─ eslint.config.mjs                # ESLint (flat config)
 ├─ next.config.ts                   # Next.js config (strict mode)
 ├─ postcss.config.mjs               # PostCSS + Tailwind v4
-├─ tsconfig.json                    # TS strict + paths @/*
+├─ tsconfig.json                    # TS strict + @/* paths
 └─ package.json
 ```
 
-## Arquitetura e funcionamento
+## Architecture and behavior
 
-### Página principal (src/pages/index.tsx)
-- Carrega fontes via `next/font` (Poppins e Geist Mono) e aplica classes de fonte.
-- Renderiza layout: `<AppHeader />`, `<TodoApp />`, `<AppFooter />` e `<BackgroundDecor />`.
+### Main page (src/pages/index.tsx)
+- Loads fonts via `next/font` (Poppins and Geist Mono) and applies font classes.
+- Renders layout: `<AppHeader />`, `<TodoApp />`, `<AppFooter />`, and `<BackgroundDecor />`.
 
-### Estado e persistência
-- `TodoApp.tsx` mantém as categorias e o filtro com `useLocalStorage` em chaves:
+### State and persistence
+- `TodoApp.tsx` stores categories and the filter using `useLocalStorage` under keys:
   - `todo.categories`: `Category[]`
   - `todo.filter`: `"all" | "pending" | "completed"`
-- O hook é SSR‑safe: só lê/escreve em `localStorage` no client, evita mismatch de hidratação e sincroniza alterações entre abas via evento `storage`.
+- The hook is SSR‑safe: it only touches `localStorage` on the client, avoids hydration mismatch, and syncs updates across tabs via the `storage` event.
 
-### Domínio (src/types/todo.ts)
+### Domain (src/types/todo.ts)
 - `Todo { id, text, completed }`
 - `Category { id, name, todos: Todo[] }`
 - `Filter = "all" | "pending" | "completed"`
 
-### Fluxos principais
-- Categorias: criar, renomear, remover.
-- To‑dos: adicionar, concluir/desmarcar, editar inline, excluir.
-- Filtro: barra com três opções que afeta os itens renderizados por categoria.
-- Drag‑and‑drop: arrastar um to‑do entre categorias. `TodoItem` define o payload (`fromCategoryId`, `todoId`); `CategoryItem` trata `onDrop` e delega para `onMoveTodo` em `TodoApp` para mover entre listas.
-- Métricas: contadores por categoria e total/concluídos no cabeçalho do app.
+### Main flows
+- Categories: create, rename, remove.
+- To‑dos: add, complete/uncomplete, inline edit, delete.
+- Filter: three options bar that affects items rendered per category.
+- Drag‑and‑drop: move a to‑do between categories. `TodoItem` sets the payload (`fromCategoryId`, `todoId`); `CategoryItem` handles `onDrop` and delegates to `onMoveTodo` in `TodoApp` to move between lists.
+- Metrics: per‑category counters and total/completed in the app header.
 
-### UI/Estilo
-- Tailwind v4 com tokens CSS customizados em `src/styles/globals.css`:
+### UI/Styling
+- Tailwind v4 with custom CSS tokens in `src/styles/globals.css`:
   - `--background`, `--foreground`, `--card`, `--muted`, `--accent`, `--accent-2`.
-  - Mapeados para o tema Tailwind via `@theme inline` como `bg-background`, `text-foreground`, etc.
-- Temas:
-  - Light: definido em `:root` e `[data-theme="light"]`.
-  - Dark: definido em `[data-theme="dark"]` e fallback por `@media (prefers-color-scheme: dark)`.
-  - Paleta dark ajustada para tons acinzentados: `background #111827`, `card #1f2937`, `muted #374151`, `foreground #e5e7eb`.
-- Acessibilidade: labels/ARIA em inputs, foco no input de nova categoria, botões com `aria-pressed` na FilterBar.
+  - Mapped to the Tailwind theme via `@theme inline` as `bg-background`, `text-foreground`, etc.
+- Themes:
+  - Light: defined in `:root` and `[data-theme="light"]`.
+  - Dark: defined in `[data-theme="dark"]` with a fallback via `@media (prefers-color-scheme: dark)`.
+  - Dark palette adjusted to grayish tones: `background #111827`, `card #1f2937`, `muted #374151`, `foreground #e5e7eb`.
+- Accessibility: labels/ARIA on inputs, focus on the new category input, `aria-pressed` on FilterBar buttons.
 
-### Componentes
-- `AddCategoryForm`/`AddTodoForm`: controlados, validam `trim`, limpam após submit.
-- `CategoryList`: estado vazio com ícone e orientações; renderiza `CategoryItem`.
-- `CategoryItem`: contadores, rename inline, DnD, lista filtrada dos to‑dos.
-- `TodoItem`: toggle via checkbox, edição inline (Enter salva, Esc cancela), exclusão, origem do DnD.
-- `AppHeader`/`AppFooter`: layout da página; rodapé lista tecnologias e crédito do autor.
-- `BackgroundDecor`: blobs decorativos não interativos.
+### Components
+- `AddCategoryForm`/`AddTodoForm`: controlled, trim‑validate, clear after submit.
+- `CategoryList`: empty state with icon and guidance; renders `CategoryItem`.
+- `CategoryItem`: counters, inline rename, DnD, filtered list of to‑dos.
+- `TodoItem`: checkbox toggle, inline edit (Enter saves, Esc cancels), delete, DnD origin.
+- `AppHeader`/`AppFooter`: page layout; footer lists technologies and author credit.
+- `BackgroundDecor`: non‑interactive decorative blobs.
 
-## Desenvolvimento
-1. Instalar dependências: `npm install`.
-2. Rodar: `npm run dev` e abrir http://localhost:3000.
-3. Build: `npm run build` e `npm start`.
+## Development
+1. Install dependencies: `npm install`.
+2. Run: `npm run dev` and open http://localhost:3000.
+3. Build: `npm run build` then `npm start`.
 
-## Personalização
-- Temas: ajuste variáveis em `src/styles/globals.css`.
-- Fontes: altere em `src/pages/index.tsx` (fonte sans e mono via `next/font`).
-- i18n: extraia strings dos componentes e centralize em um dicionário para alternar idioma.
-- Persistência remota: substitua/localmente complemente `useLocalStorage` por API/database (ex.: Neon/Supabase) mantendo os tipos de domínio.
+## Customization
+- Themes: tweak variables in `src/styles/globals.css`.
+- Fonts: change in `src/pages/index.tsx` (sans and mono via `next/font`).
+- i18n: extract component strings and centralize in a dictionary to switch locale.
+- Remote persistence: replace/augment `useLocalStorage` with API/database (e.g., Neon/Supabase) while keeping domain types.
 
-## Autor e créditos
-- Feito por Lucas Monte.
-- Tecnologias: Next.js, React, TypeScript, Tailwind CSS, ESLint, next/font.
+## Author and credits
+- Made by Lucas Monte.
+- Technologies: Next.js, React, TypeScript, Tailwind CSS, ESLint, next/font.
