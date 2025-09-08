@@ -10,7 +10,7 @@ export default function AppHeader() {
           </div>
           <div className="leading-tight">
             <p className="text-sm opacity-70">Get organized</p>
-            <h1 className="text-lg font-semibold">To-Do List by Category</h1>
+            <h1 className="text-lg font-semibold">ToolDo</h1>
           </div>
         </div>
       </div>
