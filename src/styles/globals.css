@@ -33,20 +33,20 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --background: #333333;
+  --background: #111827;
   --foreground: #e5e7eb;
-  --card: #0f1115;
-  --muted: #151821;
+  --card: #1f2937;
+  --muted: #374151;
   --accent: #818cf8;
   --accent-2: #22d3ee;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --card: #0f1115;
-    --muted: #151821;
+    --background: #111827;
+    --foreground: #e5e7eb;
+    --card: #1f2937;
+    --muted: #374151;
     --accent: #818cf8;
     --accent-2: #22d3ee;
   }
