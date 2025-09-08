@@ -1,5 +1,3 @@
-import ThemeSwitch from "@/components/ThemeSwitch";
-
 export default function AppHeader() {
   return (
     <header className="w-full border-b border-black/10 dark:border-white/20 bg-gradient-to-r from-accent/15 to-accent-2/15">
@@ -15,7 +13,6 @@ export default function AppHeader() {
             <h1 className="text-lg font-semibold">Lista de Tarefas por Categoria</h1>
           </div>
         </div>
-        <ThemeSwitch />
       </div>
     </header>
   );
