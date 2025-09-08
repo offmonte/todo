@@ -32,8 +32,8 @@ export default function CategoryList({
             <path d="M3 7h4l2 2h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
           </svg>
         </div>
-        <h3 className="text-lg font-semibold">Nenhuma categoria criada</h3>
-        <p className="mt-1 max-w-md text-sm opacity-70">Comece criando sua primeira categoria para organizar suas tarefas.</p>
+        <h3 className="text-lg font-semibold">No categories created</h3>
+        <p className="mt-1 max-w-md text-sm opacity-70">Start by creating your first category to organize your tasks.</p>
       </div>
     );
   }

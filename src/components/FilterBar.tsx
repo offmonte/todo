@@ -6,9 +6,9 @@ type Props = {
 };
 
 const options: { key: Filter; label: string }[] = [
-  { key: "all", label: "Todos" },
-  { key: "pending", label: "Pendentes" },
-  { key: "completed", label: "Concluídos" },
+  { key: "all", label: "All" },
+  { key: "pending", label: "Pending" },
+  { key: "completed", label: "Completed" },
 ];
 
 export default function FilterBar({ value, onChange }: Props) {

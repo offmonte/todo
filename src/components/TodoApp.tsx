@@ -97,9 +97,9 @@ export default function TodoApp() {
     <main className="row-start-2 flex w-full max-w-6xl flex-col items-stretch gap-6">
       <header className="flex flex-col gap-4 rounded-xl border border-black/10 dark:border-white/20 bg-background/80 p-4 shadow-sm backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between">
         <div className="flex min-w-0 flex-col">
-          <h1 className="text-2xl font-semibold tracking-tight">To-Do por Categorias</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">To-Do by Categories</h1>
           <p className="text-sm opacity-70">
-            {totalCounts.done}/{totalCounts.total} concluídos
+            {totalCounts.done}/{totalCounts.total} completed
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:min-w-[520px]">
@@ -129,7 +129,7 @@ export default function TodoApp() {
             <path d="M3 6h18" />
             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
           </svg>
-          Limpar tudo
+          Clear all
         </button>
       </footer>
     </main>
